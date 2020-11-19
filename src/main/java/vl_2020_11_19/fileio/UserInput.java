@@ -1,9 +1,6 @@
 package vl_2020_11_19.fileio;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class UserInput {
@@ -11,6 +8,7 @@ public class UserInput {
         Scanner sc = new Scanner(System.in);
         String path = "";
         String text = "";
+        String descision = "";
 
         System.out.print("Enter a file path: ");
         path = sc.nextLine();
@@ -18,12 +16,16 @@ public class UserInput {
         System.out.print("Write this to the file: ");
         text = sc.nextLine();
 
+        System.out.print("Show file? (y/j/N): ");
+        descision = sc.nextLine();
+
+        File file = new File(path);
+
         try {
-            File file = new File(path);
-            FileWriter out = new FileWriter(file);
+            FileWriter out = new FileWriter(file, true);
             BufferedWriter writer = new BufferedWriter(out);
 
-            writer.write(text);
+            writer.append(text);
             writer.newLine();
 
             // close handles
@@ -33,6 +35,16 @@ public class UserInput {
             e.printStackTrace();
         } finally {
             sc.close();
+        }
+
+        if (descision.equalsIgnoreCase("y") || descision.equalsIgnoreCase("j")) {
+            try {
+                FileReader in = new FileReader(file);
+                BufferedReader reader = new BufferedReader(in);
+                reader.lines().forEach(s -> System.out.println(s));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }
