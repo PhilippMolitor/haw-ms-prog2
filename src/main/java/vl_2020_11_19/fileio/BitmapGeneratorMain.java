@@ -18,7 +18,7 @@ public class BitmapGeneratorMain {
         }
 
         for (int x = 0; x < sizeX; x++)
-            for (int y = 0; y < sizeX; y++)
+            for (int y = 0; y < sizeY; y++)
                 bg.setPixelRgb(x, y, (byte) 0xff, (byte) 0xff, (byte) 0xff);
 
         // save file
