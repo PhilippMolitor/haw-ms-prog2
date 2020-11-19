@@ -32,7 +32,7 @@ public class BitmapGenerator {
         checkImageBounds(x, y);
 
         int baseIndex = sizeX * y + x;
-        imageData[baseIndex + 0] = b;
+        imageData[baseIndex] = b;
         imageData[baseIndex + 1] = g;
         imageData[baseIndex + 2] = r;
     }
