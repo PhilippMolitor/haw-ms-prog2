@@ -12,4 +12,4 @@ log/
 target/
 
 # outputs
-output_*.txt
+output*.*
