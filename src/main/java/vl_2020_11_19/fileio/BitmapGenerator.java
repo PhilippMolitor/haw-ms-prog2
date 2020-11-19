@@ -28,7 +28,7 @@ public class BitmapGenerator {
         bitmapHeaderData = getBitmapHeader();
     }
 
-    public void setPixelRgb(int x, int y, byte r, byte g, byte b) {
+    public void setPixelRgb(int x, int y, byte r, byte g, byte b) throws InvalidParameterException {
         checkImageBounds(x, y);
 
         int baseIndex = sizeX * y + x;
@@ -37,7 +37,7 @@ public class BitmapGenerator {
         imageData[baseIndex + 2] = r;
     }
 
-    public void setPixelGrayscale(int x, int y, byte k) {
+    public void setPixelGrayscale(int x, int y, byte k) throws InvalidParameterException {
         checkImageBounds(x, y);
 
         int baseIndex = sizeY * y + x;
@@ -70,7 +70,7 @@ public class BitmapGenerator {
         return outputStream.toByteArray();
     }
 
-    private void checkImageBounds(int x, int y) {
+    private void checkImageBounds(int x, int y) throws InvalidParameterException {
         if (x < 0 || x >= sizeX || y < 0 || y >= sizeY) {
             throw new InvalidParameterException("invalid pixel, please choose a pixel within the bitmap size.");
         }
