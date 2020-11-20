@@ -1,7 +1,7 @@
 package vl_2020_11_19.fileio;
 
-import java.io.FileWriter;
-import java.nio.charset.StandardCharsets;
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class BitmapGeneratorMain {
     public static void main(String[] args) {
@@ -24,10 +24,11 @@ public class BitmapGeneratorMain {
 
         // save file
         try {
-            FileWriter fw = new FileWriter("output_generator.bmp");
-            fw.write(new String(bg.getImageAsBytes(), StandardCharsets.UTF_8).toCharArray());
-            fw.flush();
-            fw.close();
+            File f = new File("output_generator.bmp");
+            FileOutputStream fos = new FileOutputStream(f);
+            fos.write(bg.getImageAsBytes());
+            fos.flush();
+            fos.close();
             System.out.println("image was saved!");
         } catch (Exception ex) {
             System.out.println("failed to save image:");
