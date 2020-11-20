@@ -31,19 +31,14 @@ public class BitmapGenerator {
     public void setPixelRgb(int x, int y, byte r, byte g, byte b) throws InvalidParameterException {
         checkImageBounds(x, y);
 
-        int baseIndex = sizeX * y + x;
+        int baseIndex = (y * sizeX * 3) + (x * 3);
         imageData[baseIndex] = b;
         imageData[baseIndex + 1] = g;
         imageData[baseIndex + 2] = r;
     }
 
     public void setPixelGrayscale(int x, int y, byte k) throws InvalidParameterException {
-        checkImageBounds(x, y);
-
-        int baseIndex = sizeY * y + x;
-        imageData[baseIndex] = k;
-        imageData[baseIndex + 1] = k;
-        imageData[baseIndex + 2] = k;
+        setPixelRgb(x, y, k, k, k);
     }
 
     public int getSizeX() {
