@@ -1,13 +1,13 @@
 package vl_2020_11_19.fileio;
 
-import java.io.File;
+import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 
 public class BitmapGeneratorMain {
     public static void main(String[] args) {
         BitmapGenerator bg = null;
-        int sizeX = 256;
-        int sizeY = 256;
+        int sizeX = 4096;
+        int sizeY = 4096;
 
         // try to create an image handle
         try {
@@ -29,10 +29,12 @@ public class BitmapGeneratorMain {
 
         // save file
         try {
-            File f = new File("output_generator.bmp");
-            FileOutputStream fos = new FileOutputStream(f);
-            fos.write(bg.getImageAsBytes());
-            fos.flush();
+            FileOutputStream fos = new FileOutputStream("output_generator.bmp");
+            BufferedOutputStream bw = new BufferedOutputStream(fos);
+
+            bw.write(bg.getImageAsBytes());
+            bw.flush();
+            bw.close();
             fos.close();
             System.out.println("image was saved!");
         } catch (Exception ex) {
