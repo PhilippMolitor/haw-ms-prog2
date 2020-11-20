@@ -1,6 +1,7 @@
 package vl_2020_11_19.fileio;
 
 import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
 
 public class BitmapGeneratorMain {
     public static void main(String[] args) {
@@ -24,7 +25,7 @@ public class BitmapGeneratorMain {
         // save file
         try {
             FileWriter fw = new FileWriter("output_generator.bmp");
-            fw.write(new String(bg.getImageAsBytes(), "UTF-8").toCharArray());
+            fw.write(new String(bg.getImageAsBytes(), StandardCharsets.UTF_8).toCharArray());
             fw.flush();
             fw.close();
             System.out.println("image was saved!");

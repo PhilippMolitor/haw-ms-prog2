@@ -6,11 +6,11 @@ import java.security.InvalidParameterException;
 import java.util.Arrays;
 
 public class BitmapGenerator {
-    private int sizeX;
-    private int sizeY;
-    private byte[] fileHeaderData;
-    private byte[] bitmapHeaderData;
-    private byte[] imageData;
+    private final int sizeX;
+    private final int sizeY;
+    private final byte[] fileHeaderData;
+    private final byte[] bitmapHeaderData;
+    private final byte[] imageData;
 
     public BitmapGenerator(int sizeX, int sizeY) throws Exception {
         if (sizeX <= 0 || sizeY <= 0) {
@@ -42,8 +42,8 @@ public class BitmapGenerator {
 
         int baseIndex = sizeY * y + x;
         imageData[baseIndex] = k;
-        imageData[baseIndex + (byte) 1] = k;
-        imageData[baseIndex + (byte) 2] = k;
+        imageData[baseIndex + 1] = k;
+        imageData[baseIndex + 2] = k;
     }
 
     public int getSizeX() {
@@ -59,8 +59,8 @@ public class BitmapGenerator {
 
         // concatenate output bytes (headers + image data)
         try {
-            outputStream.write(getFileHeader());
-            outputStream.write(getBitmapHeader());
+            outputStream.write(fileHeaderData);
+            outputStream.write(bitmapHeaderData);
             outputStream.write(imageData);
         } catch (IOException ex) {
             ex.printStackTrace();
